@@ -36,15 +36,12 @@ int main(void) {
 
 	write(file, 0x00, 1);
 
-	usleep(500);
+	sleep(50);
 
 	int errCount = 0;
 	for (;;) {
 		char buf[1] = { 0 };
 
-		//float data;
-
-		// Read 2 uint8 using I2C Read
 		int k = read(file, buf, 2);
 		if ((k != 2)) {
 			errCount++;
@@ -56,15 +53,14 @@ int main(void) {
 			temperature = ((buf[0]) << 8) | (buf[1]);
 			temperature >>= 4;
 
-			//The tmp102 does twos compliment but has the negative bit in the wrong spot, so test for it and correct if needed
+			//Handling negative temperature
 			if (temperature & (1 << 11))
-				temperature |= 0xF800; //Set bits 11 to 15 to 1s to get this reading into real twos compliment
+				temperature |= 0xF800;  //Calculate 1's compliment
 
-			printf(" temp:  %04f \t error:  %d\n", temperature * 0.0625,
-					errCount);
+			printf(" temp:  %04f \t error:  %d\n", temperature * 0.0625, errCount);
 
 		}
-		usleep(5);
+		sleep(5);
 
 	}
 	return 0;
