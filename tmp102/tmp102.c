@@ -10,57 +10,61 @@
 #include <fcntl.h>
 
 
-#define TMP102_I2C	0x48
-#define I2C_BUS		"/dev/i2c-1"
+#define TMP102_Addr	0x48
+#define I2C_BUS_FILE		"/dev/i2c-1"
 
 int main(void) {
 
 	int file;
 	char filename[40];
-	int addr = TMP102_I2C; // The I2C address
+	int addr = TMP102_Addr; // The I2C address
 
-	sprintf(filename, I2C_BUS);
-	if ((file = open(filename, O_RDWR)) < 0) {
-		printf("Failed to open the bus.");
-		/* ERROR HANDLING; you can check errno to see what went wrong */
+	sprintf(filename, I2C_BUS_FILE);
+	if ((file = open(filename, O_RDWR)) < 0) 
+	{
+		printf("Failed to Open the Bus");
 		printf("error: %s (%d)\n", strerror(errno), errno);
 		exit(1);
 	}
 
-	if (ioctl(file, I2C_SLAVE, addr) < 0) {
+	if (ioctl(file, I2C_SLAVE, addr) < 0) 
+	{
 		printf("Failed to acquire bus access and/or talk to slave.\n");
-		/* ERROR HANDLING; you can check errno to see what went wrong */
 		printf("error: %s (%d)\n", strerror(errno), errno);
 		exit(1);
 	}
 
 	write(file, 0x00, 1);
 
-	sleep(50);
+	sleep(1);
 
-	int errCount = 0;
-	for (;;) {
+	int error_count = 0;
+	
+	while(1) 
+	{
 		char buf[1] = { 0 };
-
 		int k = read(file, buf, 2);
-		if ((k != 2)) {
-			errCount++;
-			printf("error: %s (%d) %d\n", strerror(errno), errno, errCount);
-		} else {
+		if ((k != 2)) 
+		{
+			error_count++;
+			printf("error: %s (%d) %d\n", strerror(errno), errno, error_count);
+		} 
+		else 
+		{
 
-			int temperature;
+			int temp_val;
 
-			temperature = ((buf[0]) << 8) | (buf[1]);
-			temperature >>= 4;
+			temp_val = ((buf[0]) << 8) | (buf[1]);
+			
+			temp_val >>= 4;
 
-			//Handling negative temperature
-			if (temperature & (1 << 11))
-				temperature |= 0xF800;  //Calculate 1's compliment
+			if (temp_val & (1 << 11))
+				temp_val |= 0xF800;
 
-			printf(" temp:  %04f \t error:  %d\n", temperature * 0.0625, errCount);
+			printf("Curernt temperature value is :  %04f \t and error is :  %d\n", temp_val * 0.0625, error_count);
 
 		}
-		sleep(5);
+		sleep(5);//Sleep for 5 seconds
 
 	}
 	return 0;
