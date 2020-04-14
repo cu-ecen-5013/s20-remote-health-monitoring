@@ -10,14 +10,9 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-
-<<<<<<< HEAD
 #define TMP102_Addr	0x57
 #define I2C_BUS_FILE "/dev/i2c-1"
-=======
-#define TMP102_Addr	0x57<<1
-#define I2C_BUS_FILE		"/dev/i2c-1"
->>>>>>> 991c6f4a8df56fcb6619e2d4f6386ddb4f42574a
+
 
 int main(void) {
 
