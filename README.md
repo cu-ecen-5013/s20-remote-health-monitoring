@@ -1,6 +1,6 @@
 # ECEN 5013 AESD - Final Project Application Source Repository
 
-**Owner of the Repository - Suraj Thite , Saket Penurkar and Sankalp Pund (GitHub ID: surajthite)**
+**Owner of the Repository - Suraj Thite , Saket Penurkar and Sankalp Pund**
 
 This repository contains the final project submissions made by **Suraj Thite** , **Sankalp Pund** and **Saket Penurkar** for the ECEN 5013 AESD (Spring-20) class.
 
