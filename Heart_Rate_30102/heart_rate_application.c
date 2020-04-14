@@ -1,3 +1,4 @@
+//https://elinux.org/Interfacing_with_I2C_Devices
 #include <errno.h>
 #include <string.h>
 #include <stdio.h>
@@ -11,16 +12,18 @@
 
 
 #define TMP102_Addr	0x57
-#define I2C_BUS_FILE		"/dev/i2c-1"
+#define I2C_BUS_FILE "/dev/i2c-1"
 
 int main(void) {
 
 	int file;
+
 	char filename[40];
 
 	int addr = TMP102_Addr; // The I2C address
 
 	sprintf(filename, I2C_BUS_FILE);
+	
 	if ((file = open(filename, O_RDWR)) < 0) 
 	{
 		printf("Failed to Open the Bus");
@@ -35,7 +38,11 @@ int main(void) {
 		exit(1);
 	}
 
-	write(file, 0x00, 1);
+	char address[10] = {0};
+
+	address[0] = 0x0A;
+
+	write(file, address, 1);
 
 	sleep(1);
 
@@ -55,6 +62,17 @@ int main(void) {
 
 			int temp_val;
 
+			printf("Value of Buffer 0 = %d\n",buf[0]);
+
+			printf("Value of Buffer 1 = %d\n",buf[1]);
+
+
+			// printf("String Value of Buffer 0 = %s\n",buf[0]);
+
+			// printf("String Value of Buffer 1 = %s\n",buf[1]);
+
+
+
 			temp_val = ((buf[0]) << 8) | (buf[1]);
 			
 			temp_val >>= 4;
@@ -62,7 +80,7 @@ int main(void) {
 			if (temp_val & (1 << 11))
 				temp_val |= 0xF800;
 
-			printf("Curernt temperature value is :  %04f \t and error is :  %d\n", temp_val * 0.0625, error_count);
+			//printf("Curernt temperature value is :  %04f \t and error is :  %d\n", temp_val * 0.0625, error_count);
 
 		}
 		sleep(5);//Sleep for 5 seconds
