@@ -10,7 +10,7 @@
 #include <fcntl.h>
 
 
-#define TMP102_Addr	0x57
+#define TMP102_Addr	0x57<<1
 #define I2C_BUS_FILE		"/dev/i2c-1"
 
 int main(void) {
