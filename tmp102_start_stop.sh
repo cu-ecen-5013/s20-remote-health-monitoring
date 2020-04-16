@@ -2,7 +2,7 @@
 
 case "$1" in 
   start)
-    echo "Starting echo socket server"
+    echo "Starting to Fetch data from TMP102 sensor"
     start-stop-daemon -S -n tmp102  -a /usr/bin/tmp102 -- -d 
     ;; 
   stop)

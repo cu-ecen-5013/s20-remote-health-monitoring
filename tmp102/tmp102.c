@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
 {
    if(strcmp(argv[1],"-d") == 0)
     {
-        printf("DAeMoN Mod3!");
+        printk("DAeMoN Mod3!");
         daemon_flag = 1;   
      }                      
 }
@@ -89,7 +89,7 @@ int main(int argc, char* argv[]) {
 			if (temp_val & (1 << 11))
 				temp_val |= 0xF800;
 
-			printf("Curernt temperature value is :  %04f \t and error is :  %d\n", temp_val * 0.0625, error_count);
+			printk("Curernt temperature value is :  %04f \t and error is :  %d\n", temp_val * 0.0625, error_count);
 
 		}
 		sleep(5);//Sleep for 5 seconds
