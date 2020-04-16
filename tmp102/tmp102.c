@@ -47,7 +47,10 @@ int main(int argc, char* argv[]) {
 	sleep(1);
 
 	int error_count = 0;
-	if(daemon_flag==1)
+
+	while(1) 
+	{
+	  if(daemon_flag==1)
 		{	
 			daemon_flag=0;
 			
@@ -67,8 +70,6 @@ int main(int argc, char* argv[]) {
 			if (chdir ("/") == -1)
 			return -1;
 		}
-	while(1) 
-	{
 		char buf[1] = { 0 };
 		int k = read(file, buf, 2);
 		if ((k != 2)) 
