@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <syslog.h>
 
 int daemon_flag = 0;
 #define TMP102_Addr	0x48
@@ -15,11 +16,12 @@ int daemon_flag = 0;
 
 int main(int argc, char* argv[]) {
 
+openlog(NULL, 0, LOG_USER);
 	if(argc ==2)                                        
 {
    if(strcmp(argv[1],"-d") == 0)
     {
-        printk("DAeMoN Mod3!");
+        printf("DAeMoN Mod3!");
         daemon_flag = 1;   
      }                      
 }
@@ -89,11 +91,12 @@ int main(int argc, char* argv[]) {
 			if (temp_val & (1 << 11))
 				temp_val |= 0xF800;
 
-			printk("Curernt temperature value is :  %04f \t and error is :  %d\n", temp_val * 0.0625, error_count);
-
+			printf("Curernt temperature value is :  %04f \t and error is :  %d\n", temp_val * 0.0625, error_count);
+			syslog(LOG_ERR,"Curernt temperature value is :  %04f \t and error is :  %d\n", temp_val * 0.0625, error_count);
 		}
 		sleep(5);//Sleep for 5 seconds
 
 	}
+	closelog();
 	return 0;
 }
