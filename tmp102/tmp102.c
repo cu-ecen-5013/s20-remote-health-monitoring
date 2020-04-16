@@ -9,12 +9,20 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-
+int daemon_flag = 0;
 #define TMP102_Addr	0x48
-#define I2C_BUS_FILE		"/dev/i2c-1"
+#define I2C_BUS_FILE "/dev/i2c-1"
 
-int main(void) {
+int main(int argc, char* argv[]) {
 
+	if(argc ==2)                                        
+{
+   if(strcmp(argv[1],"-d") == 0)
+    {
+        printf("DAeMoN Mod3!");
+        daemon_flag = 1;   
+     }                      
+}
 	int file;
 	char filename[40];
 	int addr = TMP102_Addr; // The I2C address
@@ -39,7 +47,26 @@ int main(void) {
 	sleep(1);
 
 	int error_count = 0;
+	if(daemon_flag==1)
+		{	
+			daemon_flag=0;
+			
+			pid_t pid;
+
+			/* create new process */
+			pid = fork ();
+			if (pid == -1)
+			return -1;
+			else if (pid != 0)	
+			exit (EXIT_SUCCESS);
 	
+			/* create new session and process group */
+			if (setsid () == -1)
+			return -1;
+			/* set the working directory to the root directory */
+			if (chdir ("/") == -1)
+			return -1;
+		}
 	while(1) 
 	{
 		char buf[1] = { 0 };
