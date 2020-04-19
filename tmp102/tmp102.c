@@ -9,7 +9,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <syslog.h>
-#include <time.h>
+
 int daemon_flag = 0;
 #define TMP102_Addr	0x48
 #define I2C_BUS_FILE "/dev/i2c-1"
@@ -28,9 +28,7 @@ openlog(NULL, 0, LOG_USER);
 	int file;
 	char filename[40];
 	int addr = TMP102_Addr; // The I2C address
-	time_t gettime;
-	struct tm *temp = NULL;
-	char *buf2 = NULL;
+
 	sprintf(filename, I2C_BUS_FILE);
 	if ((file = open(filename, O_RDWR)) < 0) 
 	{
@@ -45,7 +43,7 @@ openlog(NULL, 0, LOG_USER);
 		printf("error: %s (%d)\n", strerror(errno), errno);
 		exit(1);
 	}
-	
+
 	write(file, 0x00, 1);
 
 	sleep(1);
@@ -92,10 +90,8 @@ openlog(NULL, 0, LOG_USER);
 
 			if (temp_val & (1 << 11))
 				temp_val |= 0xF800;
-	time( &gettime );
-	temp = localtime( &gettime );
-	buf2 = asctime(temp);
-			printf("Time: %s   Curernt temperature value is :  %04f \t and error is :  %d\n",buf2,temp_val * 0.0625, error_count);
+
+			printf("Curernt temperature value is :  %04f \t and error is :  %d\n", temp_val * 0.0625, error_count);
 			syslog(LOG_ERR,"Curernt temperature value is :  %04f \t and error is :  %d\n", temp_val * 0.0625, error_count);
 		}
 		sleep(5);//Sleep for 5 seconds
