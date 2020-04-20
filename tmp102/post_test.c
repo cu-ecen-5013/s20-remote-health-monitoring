@@ -16,7 +16,7 @@
 
 int main(int argc, char* argv[]) {
 
-	printf("****************RUNNING POST TEST FOR TMP102 SENSOR*****************");
+	printf("****************RUNNING POST TEST FOR TMP102 SENSOR*****************\n");
 	int file;
 	char filename[40];
 	int addr = TMP102_Addr; // The I2C address 
@@ -44,13 +44,13 @@ int main(int argc, char* argv[]) {
 	u_int16_t buf;
 
 	if( read(file, &buf, 2) != 2){
-		printf("POST test failed!");
+		printf("POST test failed!\n");
 		//return FAIL;
 	}
 else
-	printf("POST test passed!");
+	printf("POST test passed!\n");
 
-printf("Config Register (TMP 102) : %d\n", buf);
+printf("Config Register (TMP 102) : %x\n", buf);
 
 return 0;
 }
