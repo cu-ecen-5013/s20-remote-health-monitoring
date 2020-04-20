@@ -95,8 +95,8 @@ openlog(NULL, 0, LOG_USER);
 	time( &gettime );
 	temp = localtime( &gettime );
 	buf2 = asctime(temp);
-			printf("Time: %s   Curernt temperature value is :  %04f \t and error is :  %d\n",buf2,temp_val * 0.0625, error_count);
-			syslog(LOG_ERR,"Curernt temperature value is :  %04f \t and error is :  %d\n", temp_val * 0.0625, error_count);
+	printf("Time: %s   Curernt temperature value is :  %04f \t and error is :  %d\n",buf2,temp_val * 0.0625, error_count);
+	syslog(LOG_ERR,"Curernt temperature value is :  %04f \t and error is :  %d\n", temp_val * 0.0625, error_count);
 		}
 		sleep(5);//Sleep for 5 seconds
 
