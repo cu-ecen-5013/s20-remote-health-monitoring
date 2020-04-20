@@ -74,6 +74,8 @@ openlog(NULL, 0, LOG_USER);
 			if (chdir ("/") == -1)
 			return -1;
 		}
+		write(file, 0x00, 1);
+		sleep(1);
 		char buf[1] = { 0 };
 		int k = read(file, buf, 2);
 		if ((k != 2)) 

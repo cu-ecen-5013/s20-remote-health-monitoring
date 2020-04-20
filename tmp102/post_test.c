@@ -51,6 +51,9 @@ else
 	printf("POST test passed!\n");
 
 printf("Config Register (TMP 102) : %x\n", buf);
-	write(file, 0x00, 1);
+
+// write(file, 0x00, 1);
+// sleep(1);
+
 return 0;
 }
