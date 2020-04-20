@@ -21,9 +21,8 @@ int main(int argc, char* argv[]) {
 	char filename[40];
 	int addr = TMP102_Addr; // The I2C address 
 	int config_reg_val =0x01;
-//	time_t gettime;
-//	struct tm *temp = NULL;
-//	char *buf2 = NULL;
+	int temp_reg_val =0x00;
+
 	sprintf(filename, I2C_BUS_FILE);
 	if ((file = open(filename, O_RDWR)) < 0) 
 	{
@@ -52,8 +51,15 @@ else
 
 printf("Config Register (TMP 102) : %x\n", buf);
 
-// write(file, 0x00, 1);
-// sleep(1);
+write(file,&temp_reg_val,1);
 
+char temp_buff[1] = { 0 };
+read(file, temp_buff, 2);
+int temp_val;
+temp_val = ((temp_buff[0]) << 8) | (temp_buff[1]);
+temp_val >>= 4;
+if (temp_val & (1 << 11))
+	temp_val |= 0xF800;
+printf("Curernt temperature value is : %04f \t \n",temp_val * 0.0625);
 return 0;
 }
