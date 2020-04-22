@@ -37,7 +37,9 @@ int main(void) {
 		printf("error: %s (%d)\n", strerror(errno), errno);
 		exit(1);
 	}
-
+	char buf1[1] = { 0 };
+	int k1 = 0;
+	
 	char address[10] = {0};
 
 	char address_1[10] = {0};
@@ -56,10 +58,14 @@ int main(void) {
 
 	usleep(12000);
 
+	k1 = read(file, buf1,1);
+	
+	printf(" Config Register value : %x",buf1);
 	write(file, address, 1);
 
 	usleep(12000);
-
+	k1 = read(file, buf1,1);
+	printf(" \n Config Register Mod value : %x",buf1);
 	write(file, address_1, 1);
 
 	int error_count = 0;
@@ -68,7 +74,7 @@ int main(void) {
 	{
 		char buf[1] = { 0 };
 		int k = read(file, buf, 3);
-		printf("no of bytes read : %d",k);
+		printf("\nno of bytes read : %d",k);
 		if ((k != 3)) 
 		{
 			error_count++;
@@ -79,9 +85,9 @@ int main(void) {
 
 			int temp_val;
 
-			printf("Value of Buffer 0 = %d\n",buf[0]);
+			printf("\nValue of Buffer 0 = %d\n",buf[0]);
 
-			printf("Value of Buffer 1 = %d\n",buf[1]);
+			printf("\nValue of Buffer 1 = %d\n",buf[1]);
 
 
 			// printf("String Value of Buffer 0 = %s\n",buf[0]);
