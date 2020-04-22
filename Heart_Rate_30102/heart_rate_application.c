@@ -40,7 +40,11 @@ int main(void) {
 
 	char address[10] = {0};
 
-	address[0] = 0x09;
+	char address_1[10] = {0};
+
+	address[0] = 0x02;
+
+	address_1[0] = 0x06;
 
 	write(file, address, 1);
 
@@ -48,12 +52,14 @@ int main(void) {
 
 	sleep(1);
 
+	write(file, address_1, 1);
+
 	int error_count = 0;
 	
 	while(1) 
 	{
 		char buf[1] = { 0 };
-		int k = read(file, buf, 2);
+		int k = read(file, buf, 3);
 		if ((k != 2)) 
 		{
 			error_count++;
