@@ -42,15 +42,23 @@ int main(void) {
 
 	char address_1[10] = {0};
 
+	char address_2[10] = {0};
+
 	address[0] = 0x02;
 
 	address_1[0] = 0x06;
 
-	write(file, address, 1);
+	address_2[0] = 0x09;
+
+	write(file, address_2, 1);
 
 	//write(file, address, 1);
 
-	sleep(1);
+	sleep(0.5);
+
+	write(file, address, 1);
+
+	sleep(0.5);
 
 	write(file, address_1, 1);
 
