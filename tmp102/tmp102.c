@@ -103,7 +103,7 @@ openlog(NULL, 0, LOG_USER);
 	
 	printf("Time: %s   Current temperature value is :  %04f \t and error is :  %d\n",buf2,temp_val * 0.0625, error_count);
 
- 	snprintf(cmdbuf, sizeof(cmdbuf), "python2.7 /bin/mqtt/publisher.py T: %04fC",temp_val * 0.0625);
+ 	snprintf(cmdbuf, sizeof(cmdbuf), "python2.7 /bin/mqtt/publisher.py T:%04fC",temp_val * 0.0625);
  	err = system(cmdbuf);
  	if (err) 
  	{ 
