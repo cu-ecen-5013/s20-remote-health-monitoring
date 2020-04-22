@@ -60,7 +60,7 @@ int main(void) {
 	{
 		char buf[1] = { 0 };
 		int k = read(file, buf, 3);
-		if ((k != 2)) 
+		if ((k != 3)) 
 		{
 			error_count++;
 			printf("error: %s (%d) %d\n", strerror(errno), errno, error_count);
