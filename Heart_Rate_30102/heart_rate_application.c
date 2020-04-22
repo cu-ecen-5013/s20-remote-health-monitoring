@@ -40,9 +40,11 @@ int main(void) {
 
 	char address[10] = {0};
 
-	address[0] = 0x0A;
+	address[0] = 0x09;
 
 	write(file, address, 1);
+
+	//write(file, address, 1);
 
 	sleep(1);
 
