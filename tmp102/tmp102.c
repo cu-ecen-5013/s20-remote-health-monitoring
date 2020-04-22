@@ -25,8 +25,10 @@ openlog(NULL, 0, LOG_USER);
         daemon_flag = 1;   
      }                      
 }
-	int file;
+	int file = 0;
 	char filename[40];
+	char cmdbuf[256];
+	int err = 0;
 	int addr = TMP102_Addr; // The I2C address
 	time_t gettime;
 	struct tm *temp = NULL;
@@ -100,7 +102,16 @@ openlog(NULL, 0, LOG_USER);
 	buf2 = asctime(temp);
 	
 	printf("Time: %s   Curernt temperature value is :  %04f \t and error is :  %d\n",buf2,temp_val * 0.0625, error_count);
-	
+
+ 	snprintf(cmdbuf, sizeof(cmdbuf), "python2.7 /bin/mqtt/publisher.py T:%04d C",temp_val);
+ 	err = system(cmdbuf);
+ 	if (err) 
+ 	{ 
+ 		fprintf(stderr, "failed to %s\n", cmdbuf); 
+         exit(EXIT_FAILURE); 
+     }
+	//system("python2.7 /bin/mqtt/publisher temp_val");
+
 	syslog(LOG_ERR,"Curernt temperature value is :  %04f \t and error is :  %d\n", temp_val * 0.0625, error_count);
 		}
 		sleep(5);//Sleep for 5 seconds
