@@ -105,7 +105,7 @@ openlog(NULL, 0, LOG_USER);
 	buf2 = asctime(temp);
 	
 	printf("Time: %s Current temperature value is :  %04f \t and error is :  %d\n",buf2,temp_val * 0.0625, error_count);
-	sprintf(buf1,"Time: %s Current temperature value is : %04f",buf2,(double)temp_val);	
+	sprintf(buf1,"Time: %s Current temperature value is : %d",buf2,temp_val);	
 	printf("**** %s ****",buf1);
 	syslog(LOG_ERR,"Current temperature value is :  %04f \t and error is :  %d\n", temp_val * 0.0625, error_count);
 	}
