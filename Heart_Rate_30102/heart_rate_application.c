@@ -68,6 +68,7 @@ int main(void) {
 	{
 		char buf[1] = { 0 };
 		int k = read(file, buf, 3);
+		printf("no of bytes read : %d",k);
 		if ((k != 3)) 
 		{
 			error_count++;
