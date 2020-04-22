@@ -59,13 +59,13 @@ int main(void) {
 	usleep(12000);
 
 	k1 = read(file, buf1,1);
-	
-	printf(" Config Register value : %x",buf1);
+	printf("NUmber of bytes read : %d",k1);
+	printf(" Config Register value : %s",buf1);
 	write(file, address, 1);
 
 	usleep(12000);
 	k1 = read(file, buf1,1);
-	printf(" \n Config Register Mod value : %x",buf1);
+	printf(" \n Config Register Mod value : %s",buf1);
 	write(file, address_1, 1);
 
 	int error_count = 0;
