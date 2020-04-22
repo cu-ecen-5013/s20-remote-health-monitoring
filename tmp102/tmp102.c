@@ -26,8 +26,8 @@ openlog(NULL, 0, LOG_USER);
      }                      
 }
 	int file;
-	int fd;
-	int nr =0;
+//	int fd;
+//	int nr =0;
 	char filename[40];
 	int addr = TMP102_Addr; // The I2C address
 	time_t gettime;
@@ -36,7 +36,6 @@ openlog(NULL, 0, LOG_USER);
 	char *buf2 = NULL;
 	sprintf(filename, I2C_BUS_FILE);
 
-	fd = open("/var/logs/tmp102_log", O_RDWR | O_CREAT | O_APPEND, 0755);
 
 	if ((file = open(filename, O_RDWR)) < 0) 
 	{
@@ -106,13 +105,8 @@ openlog(NULL, 0, LOG_USER);
 	buf2 = asctime(temp);
 	
 	printf("Time: %s Current temperature value is :  %04f \t and error is :  %d\n",buf2,temp_val * 0.0625, error_count);
-	sprintf(buf1,"Time: %s Current temperature value is : %04f",buf2,(double)temp_val);
-	nr = write(fd,buf1,strlen(buf1));
-	if(nr == -1)
-	{
-  		syslog(LOG_ERR,"\nError occured while logging the data \n");
-	}
-	
+	sprintf(buf1,"Time: %s Current temperature value is : %04f",buf2,(double)temp_val);	
+	printf("**** %s ****",buf1);
 	syslog(LOG_ERR,"Current temperature value is :  %04f \t and error is :  %d\n", temp_val * 0.0625, error_count);
 	}
 	  sleep(5);//Sleep for 5 seconds
