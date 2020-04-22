@@ -54,11 +54,11 @@ int main(void) {
 
 	//write(file, address, 1);
 
-	sleep(0.5);
+	msleep(12);
 
 	write(file, address, 1);
 
-	sleep(0.5);
+	msleep(12);
 
 	write(file, address_1, 1);
 
