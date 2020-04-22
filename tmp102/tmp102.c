@@ -74,6 +74,7 @@ openlog(NULL, 0, LOG_USER);
 			if (chdir ("/") == -1)
 			return -1;
 		}
+
 		char buf[1] = { 0 };
 		int k = read(file, buf, 2);
 		if ((k != 2)) 
@@ -93,10 +94,14 @@ openlog(NULL, 0, LOG_USER);
 			if (temp_val & (1 << 11))
 				temp_val |= 0xF800;
 	time( &gettime );
+	
 	temp = localtime( &gettime );
+	
 	buf2 = asctime(temp);
-			printf("Time: %s   Curernt temperature value is :  %04f \t and error is :  %d\n",buf2,temp_val * 0.0625, error_count);
-			syslog(LOG_ERR,"Curernt temperature value is :  %04f \t and error is :  %d\n", temp_val * 0.0625, error_count);
+	
+	printf("Time: %s   Curernt temperature value is :  %04f \t and error is :  %d\n",buf2,temp_val * 0.0625, error_count);
+	
+	syslog(LOG_ERR,"Curernt temperature value is :  %04f \t and error is :  %d\n", temp_val * 0.0625, error_count);
 		}
 		sleep(5);//Sleep for 5 seconds
 
