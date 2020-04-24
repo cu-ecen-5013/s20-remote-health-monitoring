@@ -60,8 +60,8 @@ int main(void) {
 
 	//k1 = read(file, buf1,1);
 
-	k1 = read(file, buf1,1);
-	printf("NUmber of bytes read : %d",k1);
+	//k1 = read(file, buf1,1);
+	//printf("NUmber of bytes read : %d",k1);
 
 	printf(" Config Register value : %s",buf1);
 	write(file, address, 1);
@@ -70,7 +70,7 @@ int main(void) {
 
 	//k1 = read(file, buf1,1);
 
-	k1 = read(file, buf1,1);
+	//k1 = read(file, buf1,1);
 
 	printf(" \n Config Register Mod value : %s",buf1);
 	write(file, address_1, 1);
