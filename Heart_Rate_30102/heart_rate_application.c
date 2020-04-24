@@ -58,22 +58,20 @@ int main(void) {
 
 	usleep(12000);
 
-<<<<<<< HEAD
 	//k1 = read(file, buf1,1);
-	
-=======
+
 	k1 = read(file, buf1,1);
 	printf("NUmber of bytes read : %d",k1);
->>>>>>> 6850648011cd582de8b9657539dffe0d9117a2ac
+
 	printf(" Config Register value : %s",buf1);
 	write(file, address, 1);
 
 	usleep(12000);
-<<<<<<< HEAD
+
 	//k1 = read(file, buf1,1);
-=======
+
 	k1 = read(file, buf1,1);
->>>>>>> 6850648011cd582de8b9657539dffe0d9117a2ac
+
 	printf(" \n Config Register Mod value : %s",buf1);
 	write(file, address_1, 1);
 
