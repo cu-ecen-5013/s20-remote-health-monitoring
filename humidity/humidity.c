@@ -169,6 +169,6 @@ void Humidity()
 
 	time_var = time(NULL);
 
-	printf("%s Humidity of ICU = %.1d% \n",ctime(&mytime), humidity_buffer[0]);
+	printf("%s Humidity of ICU = %.1d% \n",ctime(&time_var), humidity_buffer[0]);
 }
  
