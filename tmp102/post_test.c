@@ -43,12 +43,13 @@ int main(int argc, char* argv[]) {
 	u_int16_t buf;
 
 	if( read(file, &buf, 2) != 2){
-		printf("POST test failed!\n");
+		printf("*******************POST test failed!**************\n");
 		//return FAIL;
 	}
-else
-	printf("POST test passed!\n");
-
+else if(buf==0xA060)
+		{
+			printf("*************POST test passed!****************\n");
+		}
 printf("Config Register (TMP 102) : %x\n", buf);
 
 write(file,&temp_reg_val,1);

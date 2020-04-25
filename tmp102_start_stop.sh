@@ -3,6 +3,7 @@
 case "$1" in 
   start)
     echo "Starting to Fetch data from TMP102 sensor"
+    /usr/bin/post_test
     start-stop-daemon -S -n tmp102  -a /usr/bin/tmp102 -- -d 
     ;; 
   stop)
