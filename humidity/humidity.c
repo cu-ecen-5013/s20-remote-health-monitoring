@@ -28,6 +28,7 @@
 int humidity_buffer[1] = { 0 };
 int Local_buffer[1] = { 0 };
 char*time_buff=NULL;
+char buffer[50];
 
 /*Function Prototype*/
 void Humidity(void);
@@ -186,6 +187,8 @@ void Humidity()
 
 	time_buff =asctime(local);
 
-	printf("Time: %s  Humidity of ICU = %.1d% \n", time_buff, humidity_buffer[0]);
+	snprintf(buffer,strlen(time_buff),time_buff);
+
+	printf("Time: %s Humidity of ICU = %.1d% \n", buffer, humidity_buffer[0]);
 }
  
