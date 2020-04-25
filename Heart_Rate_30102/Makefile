@@ -13,6 +13,6 @@ endif
 all: humidity
 	
 humidity: humidity.c
-	$(CC) $(CFLAGS) $(INCLUDES) humidity.c -o humidity $(LDFLAGS)
+	$(CC) $(CFLAGS) $(INCLUDES) humidity.c -o humidity -lwiringPi
 clean:	
 	rm -rf *o humidity
