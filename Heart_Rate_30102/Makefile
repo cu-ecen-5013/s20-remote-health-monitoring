@@ -7,7 +7,7 @@ ifeq ($(CFLAGS),)
 endif
 
 ifeq ($(LDFLAGS),)
-	LDFLAGS = -pthread -lrt 
+	LDFLAGS = -pthread -lrt -lwiringPi
 endif
 
 all: humidity
