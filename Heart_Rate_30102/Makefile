@@ -10,9 +10,9 @@ ifeq ($(LDFLAGS),)
 	LDFLAGS = -pthread -lrt 
 endif
 
-all: HR_application
+all: humidity
 	
-HR_application: HR_application.c
-	$(CC) $(CFLAGS) $(INCLUDES) HR_application.c -o HR_application $(LDFLAGS)
+humidity: humidity.c
+	$(CC) $(CFLAGS) $(INCLUDES) humidity.c -o humidity $(LDFLAGS)
 clean:	
-	rm -rf *o HR_application
+	rm -rf *o humidity
