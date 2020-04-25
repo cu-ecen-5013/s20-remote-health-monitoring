@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include <wiringPi.h>
 
 /*Macros*/ 
@@ -22,7 +23,7 @@
 #define WAIT_FOR_RESPONSE 2000    /*wait for 2 sec for sensor response*/
  
 /*Buffer to store sensor value*/ 
-int humidity_buffer = { 0 };
+int humidity_buffer[1] = { 0 };
 
 /*
 Function Name: Main()
@@ -48,7 +49,7 @@ int main( void )
 	}	
 		
  
-	while ( true )
+	while (true)
 	{
 		Humidity();
 
