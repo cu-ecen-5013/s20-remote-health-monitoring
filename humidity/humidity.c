@@ -4,7 +4,8 @@
 	Auther: Sankalp Pund
 	Refrence: http://wiringpi.com/reference/core-functions/
 			  http://wiringpi.com/reference/timing/
-			  http://www.uugear.com/portfolio/read-dht1122-temperature-humidity-sensor-from-raspberry-pi/ 				  	 
+			  http://www.uugear.com/portfolio/read-dht1122-temperature-humidity-sensor-from-raspberry-pi/
+			  https://www.geeksforgeeks.org/time-h-localtime-function-in-c-with-examples/ 				  	 
 */
 /*Header files*/
 #include <stdio.h>
@@ -26,10 +27,10 @@
 /*Buffer to store sensor value*/ 
 int humidity_buffer[1] = { 0 };
 int Local_buffer[1] = { 0 };
+char*time_buff=NULL;
 
 /*Function Prototype*/
 void Humidity(void);
-char* date_utility();
 
 /*
 Function Name: Main()
@@ -170,30 +171,21 @@ void Humidity()
 		}
 	}
 
-	Local_buffer[0]=humidity_buffer[0];
-
 	if(humidity_buffer[0]<=0)
 	{
 		humidity_buffer[0]=Local_buffer[0];
 	}
 
-	printf("Time: %s  Humidity of ICU = %.1d% \n", date_utility(), humidity_buffer[0]);
-}
- 
-/* Function Name: date_utility()
- * Description: This function returns local time and date.
- * Inputs : None
- * Return Value : pointer to character giving local time and date.	   	
- * reference:https://www.geeksforgeeks.org/time-h-localtime-function-in-c-with-examples/
-*/
-	
-char* date_utility()
-{	
+	Local_buffer[0]=humidity_buffer[0];
+
 	struct tm* local;
 	
 	time_t t = time(NULL);
 	
 	local = localtime(&t);
 
-	return asctime(local);
+	time_buff =asctime(local);
+
+	printf("Time: %s  Humidity of ICU = %.1d% \n", time_buff, humidity_buffer[0]);
 }
+ 
