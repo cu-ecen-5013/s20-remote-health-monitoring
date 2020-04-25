@@ -6,10 +6,6 @@ ifeq ($(CFLAGS),)
 	 CFLAGS = -g -Wall -Werror
 endif
 
-ifeq ($(LDFLAGS),)
-	LDFLAGS = -pthread -lrt -lwiringPi
-endif
-
 all: humidity
 	
 humidity: humidity.c

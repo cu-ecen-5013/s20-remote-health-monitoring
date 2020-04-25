@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <time.h>
 #include <wiringPi.h>
 
 /*Macros*/ 
@@ -31,8 +32,30 @@ Description: Measures humidity and setup wiring connection
 Input: void
 Return: integer
 */
-int main( void )
-{
+int main(int argc, char* argv[])
+{   
+	char*daestr;
+
+	int result=0;
+
+	int daemon_flag=0;
+
+	if(argc==2)
+	{
+		for(int i=1; i<argc;i++)
+		{
+			daestr=argv[i];
+		}
+
+		if((result= strcmp(daestr,"-d"))==0)
+		{
+			printf("Starting in Daemon Mode\n");
+
+			daemon_flag=1;
+		}
+		
+	}
+
 	printf( "Started Measuring Humidity sensor\n" );
 
 	int status;
@@ -51,6 +74,30 @@ int main( void )
  
 	while (true)
 	{
+		/*Daemon Code reused from https://github.com/cu-ecen-5013\
+		/assignment-3-manual-kernel-and-root-filesystem-build-Sankalppund/blob/master/server/aesdsocket.c#L212*/
+
+		if(daemon_flag==1)
+		{	
+			daemon_flag=0;
+			
+			pid_t pid;
+
+			/* create new process */
+			pid = fork ();
+			if (pid == -1)
+			return -1;
+			else if (pid != 0)	
+			exit (EXIT_SUCCESS);
+	
+			/* create new session and process group */
+			if (setsid () == -1)
+			return -1;
+			/* set the working directory to the root directory */
+			if (chdir ("/") == -1)
+			return -1;
+		}
+
 		Humidity();
 
 		delay( WAIT_FOR_RESPONSE ); /* wait 2 seconds before next read */
@@ -117,6 +164,11 @@ void Humidity()
 			index2++;
 		}
 	}
-	printf("Humidity of ICU = %.1d% \n", humidity_buffer[0]);
+
+	time_t time_var;
+
+	time_var = time(NULL);
+
+	printf("%s Humidity of ICU = %.1d% \n",ctime(&mytime), humidity_buffer[0]);
 }
  
