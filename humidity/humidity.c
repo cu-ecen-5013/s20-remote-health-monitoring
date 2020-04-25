@@ -27,6 +27,10 @@
 int humidity_buffer[1] = { 0 };
 int Local_buffer[1] = { 0 };
 
+/*Function Prototype*/
+void Humidity(void);
+char* date_utility();
+
 /*
 Function Name: Main()
 Description: Measures humidity and setup wiring connection
@@ -166,16 +170,14 @@ void Humidity()
 		}
 	}
 
-	Local_buffer=humidity_buffer;
+	Local_buffer[0]=humidity_buffer[0];
 
 	if(humidity_buffer[0]<=0)
 	{
-		humidity_buffer=Local_buffer;
+		humidity_buffer[0]=Local_buffer[0];
 	}
 
-	char* date_buffer=date_utility();
-
-	printf("Time: %s  Humidity of ICU = %.1d% \n",date_buffer, humidity_buffer[0]);
+	printf("Time: %s  Humidity of ICU = %.1d% \n", date_utility(), humidity_buffer[0]);
 }
  
 /* Function Name: date_utility()
