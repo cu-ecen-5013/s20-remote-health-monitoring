@@ -25,6 +25,7 @@
  
 /*Buffer to store sensor value*/ 
 int humidity_buffer[1] = { 0 };
+int Local_buffer[1] = { 0 };
 
 /*
 Function Name: Main()
@@ -165,10 +166,32 @@ void Humidity()
 		}
 	}
 
-	time_t time_var;
+	Local_buffer=humidity_buffer;
 
-	time_var = time(NULL);
+	if(humidity_buffer[0]<=0)
+	{
+		humidity_buffer=Local_buffer;
+	}
 
-	printf("%s Humidity of ICU = %.1d% \n",ctime(&time_var), humidity_buffer[0]);
+	char* date_buffer=date_utility();
+
+	printf("Time: %s  Humidity of ICU = %.1d% \n",date_buffer, humidity_buffer[0]);
 }
  
+/* Function Name: date_utility()
+ * Description: This function returns local time and date.
+ * Inputs : None
+ * Return Value : pointer to character giving local time and date.	   	
+ * reference:https://www.geeksforgeeks.org/time-h-localtime-function-in-c-with-examples/
+*/
+	
+char* date_utility()
+{	
+	struct tm* local;
+	
+	time_t t = time(NULL);
+	
+	local = localtime(&t);
+
+	return asctime(local);
+}
