@@ -128,11 +128,6 @@ int main(void)
             HR = i2c_smbus_read_word_data(fd,FIFO_rd_ptr);
             printf("\n\r HR Value is: %d",HR);
 
-            for(int i=0; i<32;i++)
-            {
-            	   HR1 = i2c_smbus_read_word_data(fd,FIFO_rd_ptr++);
-            	   printf("\n\r HR Value is from fifo: %d",HR1);
-            }
     }
     
     return 0;    
