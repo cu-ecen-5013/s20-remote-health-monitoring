@@ -192,7 +192,7 @@ void Humidity()
 
 	printf("Time: %s Humidity of ICU = %.1d% \n", buffer, humidity_buffer[0]);
 
-    snprintf(concatenate,sizeof(concatenate),"|	%s  |	 %.1d%      |\n", buffer, humidity_buffer[0]);
+    snprintf(concatenate,sizeof(concatenate),"|	%s  |	 		%.1d% 	     |\n", buffer, humidity_buffer[0]);
 
     snprintf(buffer_py,sizeof(buffer_py),"python2.7 /bin/MQTT/Client-Publisher.py '%s'", concatenate);
 
