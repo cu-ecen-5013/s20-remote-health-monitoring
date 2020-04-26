@@ -194,6 +194,8 @@ void Humidity()
 
     snprintf(concatenate,strlen(concatenate),"|		%s 		|	  %.1d% 	|\n", buffer, humidity_buffer[0]);
 
+    printf("concatentate string = %s\n",concatenate);
+
     snprintf(buffer_py,sizeof(buffer_py),"python2.7 /bin/MQTT/Client-Publisher.py %s", concatenate);
 
     system(buffer_py); 	
