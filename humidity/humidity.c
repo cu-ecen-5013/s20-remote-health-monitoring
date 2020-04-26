@@ -188,7 +188,7 @@ void Humidity()
 	
 	local = localtime(&t);
 
-	strftime(buffer,strlen(buffer),"%m/%d/%Y--%H:%M:%S", local);
+	strftime(buffer,sizeof(buffer),"%m/%d/%Y--%H:%M:%S", local);
 
 	printf("Time: %s Humidity of ICU = %.1d% \n", buffer, humidity_buffer[0]);
 
