@@ -192,7 +192,7 @@ void Humidity()
 
 	printf("Time: %s Humidity of ICU = %.1d% \n", buffer, humidity_buffer[0]);
 
-    snprintf(concatenate,strlen(concatenate),"|		%s 		|	  %.1d% 	|\n", buffer, humidity_buffer[0]);
+    snprintf(concatenate,sizeof(concatenate),"|		%s 		|	  %.1d% 	|\n", buffer, humidity_buffer[0]);
 
     printf("concatentate string = %s\n",concatenate);
 
