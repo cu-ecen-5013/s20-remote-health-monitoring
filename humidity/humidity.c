@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <string.h>
 #include <time.h>
 #include <wiringPi.h>
 
@@ -29,6 +30,8 @@ int humidity_buffer[1] = { 0 };
 int Local_buffer[1] = { 0 };
 char*time_buff=NULL;
 char buffer[50];
+char concatenate[100];
+char buffer_py[100];
 
 /*Function Prototype*/
 void Humidity(void);
@@ -185,10 +188,14 @@ void Humidity()
 	
 	local = localtime(&t);
 
-	time_buff =asctime(local);
-
-	snprintf(buffer,strlen(time_buff),time_buff);
+	strftime(buffer,strlen(buffer),"%m/%d/%Y--%H:%M:%S", local)
 
 	printf("Time: %s Humidity of ICU = %.1d% \n", buffer, humidity_buffer[0]);
+
+    snprintf(concatenate,strlen(concatenate),"|		%s 		|	  %.1d% 	|\n", buffer, humidity_buffer[0]);
+
+    snprintf(buffer_py,sizeof(buffer_py),"python2.7 /bin/MQTT/Client-Publisher.py %s" concatenate);
+
+    system(buffer_py); 	
 }
  
