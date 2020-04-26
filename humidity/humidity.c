@@ -188,13 +188,13 @@ void Humidity()
 	
 	local = localtime(&t);
 
-	strftime(buffer,strlen(buffer),"%m/%d/%Y--%H:%M:%S", local)
+	strftime(buffer,strlen(buffer),"%m/%d/%Y--%H:%M:%S", local);
 
 	printf("Time: %s Humidity of ICU = %.1d% \n", buffer, humidity_buffer[0]);
 
     snprintf(concatenate,strlen(concatenate),"|		%s 		|	  %.1d% 	|\n", buffer, humidity_buffer[0]);
 
-    snprintf(buffer_py,sizeof(buffer_py),"python2.7 /bin/MQTT/Client-Publisher.py %s" concatenate);
+    snprintf(buffer_py,sizeof(buffer_py),"python2.7 /bin/MQTT/Client-Publisher.py %s", concatenate);
 
     system(buffer_py); 	
 }
