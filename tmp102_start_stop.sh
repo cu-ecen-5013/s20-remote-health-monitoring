@@ -4,9 +4,8 @@ case "$1" in
   start)
     echo "Starting to Fetch data from TMP102 sensor"
     i= /usr/bin/post_test
-    if [ i -eq 0 ]
-    start-stop-daemon -S -n tmp102  -a /usr/bin/tmp102 -- -d 
-    then
+    if [ i -eq 0 ];then
+      start-stop-daemon -S -n tmp102  -a /usr/bin/tmp102 -- -d 
     fi
     
     ;; 
