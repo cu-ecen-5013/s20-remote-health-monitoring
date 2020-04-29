@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
 
 	if( read(file, &buf, 2) != 2){
 		printf("*******************POST test failed!**************\n");
-		//return FAIL;
+		return 1;
 	}
 else if(buf==0xA060)
 		{
