@@ -4,7 +4,7 @@
 case "$1" in
   start)
     echo "Starting Server Python script"
-    python2.7 /bin/MQTT_Server/Server.py
+    /usr/bin/server
     ;;
   *)
     echo "Usage : $0 {start|stop}"
